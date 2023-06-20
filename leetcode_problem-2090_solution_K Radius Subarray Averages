@@ -1,0 +1,26 @@
+problem:
+https://leetcode.com/problems/k-radius-subarray-averages/
+
+
+solution:
+class Solution {
+    public int[] getAverages(int[] nums, int k) {
+        int n=nums.length;
+        int[] ans=new int[n];
+        Arrays.fill(ans,-1);
+        long sum=0;
+        if(n<2*k+1){
+            return ans;
+        }
+        for(int i=0;i<2*k;i++){
+            sum+=nums[i];
+        }
+        for(int i=2*k;i<n;++i){
+            sum+=nums[i];
+            int average=(int)((sum)/(2*k+1));
+            ans[i-k]=average;
+            sum-=nums[i-2*k];
+        }
+        return ans;
+    }
+}
